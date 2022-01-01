@@ -159,6 +159,7 @@ use PHPMailer\PHPMailer\Exception;
             $mail->AltBody = 'Mô tả đơn hàng';
          
             $mail->send();
+            unset($_SESSION["cart"]);
             header('location:index.php?page_layout=success');
         } catch (Exception $e) {
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
