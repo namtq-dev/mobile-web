@@ -98,6 +98,7 @@ use PHPMailer\PHPMailer\Exception;
             <td width="20%"><b><font color="#FFFFFF">Tổng tiền</font></b></td>
         </tr>';
         $query = mysqli_query($conn, $sql);
+        $total_price_all = 0;
         while($row = mysqli_fetch_array($query)){
         $total_price = $_SESSION["cart"][$row["prd_id"]]*$row["prd_price"];
         $total_price_all += $total_price;
@@ -138,7 +139,7 @@ use PHPMailer\PHPMailer\Exception;
             $mail->Port = 587;                                    // TCP port to connect to
          
             //Recipients
-            $mail->setFrom('dathunter100@gmail.com', 'Mailer');
+            $mail->setFrom('dathunter100@gmail.com', 'VietPro Moblie Shop');
 
             $mail->addAddress($email, $name);     // Add a recipient
             
