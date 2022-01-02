@@ -78,7 +78,7 @@ use PHPMailer\PHPMailer\Exception;
 </div>
 <!--	End Cart	-->
 <?php
-    if(isset($_POST["name"]) && isset($_POST["mail"]) && isset($_POST["phone"]) && isset($_POST["add"])){
+    if(isset($_SESSION["cart"]) && isset($_POST["name"]) && isset($_POST["mail"]) && isset($_POST["phone"]) && isset($_POST["add"])){
         $name = $_POST["name"];
         $email = $_POST["mail"];
         $phone = $_POST["phone"];
