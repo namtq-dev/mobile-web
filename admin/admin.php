@@ -114,6 +114,10 @@
 			case "delete_product":
 				include_once("delete_product.php");
 				break;
+			case "delete_user":
+				include_once("delete_user.php");
+				break;
+
 		}
 	} else {
 		include_once("dashboard.php");
