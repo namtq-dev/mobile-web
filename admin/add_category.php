@@ -1,4 +1,20 @@
+    <?php
+        if(isset($_POST["sbm"])){
+            $cat_name = $_POST["cat_name"];
+            
+           
 
+            $sql = "INSERT INTO category(
+                cat_name
+            )
+            VALUES(
+                
+                '$cat_name'
+            )";
+            mysqli_query($conn, $sql);
+            header("location:index.php?page_layout=category");
+        }
+    ?>
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
 		<div class="row">

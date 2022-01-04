@@ -117,7 +117,9 @@
 			case "delete_user":
 				include_once("delete_user.php");
 				break;
-
+			case "add_category":
+				include_once("add_category.php");
+				break;
 		}
 	} else {
 		include_once("dashboard.php");

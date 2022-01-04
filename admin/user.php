@@ -63,7 +63,7 @@
                             if($page_next > $total_pages){
                                 $page_next = $total_pages;
                             }
-                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='.$page_next.'">&raquo;</a></li>';
+                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=user&page='.$page_next.'">&raquo;</a></li>';
                             //End Page Next
                             $list_pages .= '</ul>';
                             echo $list_pages;
