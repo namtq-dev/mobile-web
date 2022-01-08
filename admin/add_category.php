@@ -1,18 +1,27 @@
     <?php
+        $cat_name = "";
+        $error_name = 0;
         if(isset($_POST["sbm"])){
+            $error_name = 0;
             $cat_name = $_POST["cat_name"];
-            
-           
+            $sql=mysqli_query($conn,"SELECT * FROM category WHERE cat_name='$cat_name'");
 
-            $sql = "INSERT INTO category(
-                cat_name
-            )
-            VALUES(
+            if(mysqli_num_rows($sql)>0)
+            {
+                $error_name = 1; 
+            }
+           
+            if($error_name == 0){
+                $sql = "INSERT INTO category(
+                    cat_name
+                )
+                VALUES(
                 
-                '$cat_name'
-            )";
-            mysqli_query($conn, $sql);
-            header("location:index.php?page_layout=category");
+                    '$cat_name'
+                )";
+                mysqli_query($conn, $sql);
+                header("location:index.php?page_layout=category");
+            }
         }
     ?>
 		
@@ -35,7 +44,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-md-8">
-                        	<div class="alert alert-danger">Danh mục đã tồn tại !</div>
+                            <?php if( $error_name == 1) echo '<div class="alert alert-danger">Danh mục đã tồn tại !</div>'; ?>
+                        	
                             <form role="form" method="post">
                             <div class="form-group">
                                 <label>Tên danh mục:</label>
