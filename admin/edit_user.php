@@ -92,9 +92,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Quyền</label>
-                                    <select name="user_level" class="form-control" value="<?php echo $user_level;?>">
+                                    <select name="user_level" class="form-control" value="<?php echo $row["user_level"]; ?>">
                                         <option value=1>Admin</option>
-                                        <option value=2 selected>Member</option>
+                                        <option value=2 >Member</option>
                                     </select>
                                 </div>
                                 <button type="submit" name="sbm" class="btn btn-primary">Cập nhật</button>

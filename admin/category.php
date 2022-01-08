@@ -16,6 +16,7 @@
 	</div>
 	<!--/.row-->
 	<div id="toolbar" class="btn-group">
+		
 		<a href="index.php?page_layout=add_category" class="btn btn-success">
 			<i class="glyphicon glyphicon-plus"></i> Thêm danh mục
 		</a>

@@ -39,7 +39,15 @@
 					<li class="dropdown pull-right">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user">
 								<use xlink:href="#stroked-male-user"></use>
-							</svg> Admin <span class="caret"></span></a>
+							</svg>
+							<?php
+							$mail = $_SESSION['users']['mail'];
+							$sql = "SELECT * FROM user WHERE user_mail LIKE '$mail'";
+							$query = mysqli_query($conn, $sql);
+							while($row = mysqli_fetch_array($query)){
+								echo $row['user_full']; 
+							}
+							?>  <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#"><svg class="glyph stroked male-user">
 										<use xlink:href="#stroked-male-user"></use>
