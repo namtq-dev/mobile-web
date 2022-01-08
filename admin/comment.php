@@ -52,7 +52,7 @@
                             $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=comment&page='.$page_prev.'">&laquo;</a></li>';
                             //End Page Previous
                             for($i = 1; $i <= $total_pages; $i++){
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=comment &page='.$i.'">'.$i.'</a></li>';
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=comment&page='.$i.'">'.$i.'</a></li>';
                             }
                             //Page Next
                             $page_next = $page + 1;
