@@ -114,6 +114,12 @@ use PHPMailer\PHPMailer\Exception;
                 SET prd_quantity = $prd_quantity
                 WHERE prd_id = " . $row["prd_id"];
         mysqli_query($conn, $sql);
+        if($prd_quantity == 0){
+            $sql = "UPDATE product
+                SET prd_status = 0
+                WHERE prd_id = " . $row["prd_id"];
+            mysqli_query($conn, $sql);
+        }
         }
         $str_body .='
         <tr>
