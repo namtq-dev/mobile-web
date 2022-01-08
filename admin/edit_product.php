@@ -7,50 +7,57 @@ $query = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($query);
 
 //Update sản phẩm
+$error = 0;
 if(isset($_POST["sbm"])){
-    $prd_name = $_POST["prd_name"];
-    $prd_price = $_POST["prd_price"];
-    $prd_warranty = $_POST["prd_warranty"];
-    $prd_accessories = $_POST["prd_accessories"];
-    $prd_promotion = $_POST["prd_promotion"];
-    $prd_new = $_POST["prd_new"];
+    if( ($_POST["prd_quantity"] == 0 && $_POST["prd_status"] == 0) || ($_POST["prd_quantity"] != 0 && $_POST["prd_status"] == 1) ){
+        $prd_name = $_POST["prd_name"];
+        $prd_price = $_POST["prd_price"];
+        $prd_quantity = $_POST["prd_quantity"];
+        $prd_warranty = $_POST["prd_warranty"];
+        $prd_accessories = $_POST["prd_accessories"];
+        $prd_promotion = $_POST["prd_promotion"];
+        $prd_new = $_POST["prd_new"];
 
-    if($_FILES["prd_image"]["name"] == ''){
-        $prd_image = $row["prd_image"];
-    } else{
-        $prd_image = $_FILES["prd_image"]["name"];
-        $prd_tmp_name = $_FILES["prd_image"]["tmp_name"];
-        move_uploaded_file($prd_tmp_name, "img/products/".$prd_image);
+        if($_FILES["prd_image"]["name"] == ''){
+            $prd_image = $row["prd_image"];
+        } else{
+            $prd_image = $_FILES["prd_image"]["name"];
+            $prd_tmp_name = $_FILES["prd_image"]["tmp_name"];
+            move_uploaded_file($prd_tmp_name, "img/products/".$prd_image);
+        }
+
+
+        $cat_id = $_POST["cat_id"];
+        $prd_status = $_POST["prd_status"];
+        if(isset($_POST["prd_featured"])){
+            $prd_featured = $_POST["prd_featured"];
+        } else{
+            $prd_featured = 0;
+        }
+        $prd_details = $_POST["prd_details"];
+
+        $sql = "UPDATE product
+        SET
+            prd_name = '$prd_name',
+            prd_price = $prd_price,
+            prd_quantity = $prd_quantity,
+            prd_warranty = '$prd_warranty',
+            prd_accessories = '$prd_accessories',
+            prd_promotion = '$prd_promotion',
+            prd_new = '$prd_new',
+            prd_image = '$prd_image',
+            cat_id = $cat_id,
+            prd_status = $prd_status,
+            prd_featured = $prd_featured,
+            prd_details = '$prd_details'
+        WHERE prd_id = $prd_id
+        ";
+
+        mysqli_query($conn, $sql);
+        header("location:index.php?page_layout=product");
+    } else {
+        $error = 1;
     }
-
-
-    $cat_id = $_POST["cat_id"];
-    $prd_status = $_POST["prd_status"];
-    if(isset($_POST["prd_featured"])){
-        $prd_featured = $_POST["prd_featured"];
-    } else{
-        $prd_featured = 0;
-    }
-    $prd_details = $_POST["prd_details"];
-
-    $sql = "UPDATE product
-    SET
-        prd_name = '$prd_name',
-        prd_price = $prd_price,
-        prd_warranty = '$prd_warranty',
-        prd_accessories = '$prd_accessories',
-        prd_promotion = '$prd_promotion',
-        prd_new = '$prd_new',
-        prd_image = '$prd_image',
-        cat_id = $cat_id,
-        prd_status = $prd_status,
-        prd_featured = $prd_featured,
-        prd_details = '$prd_details'
-    WHERE prd_id = $prd_id
-    ";
-
-    mysqli_query($conn, $sql);
-    header("location:index.php?page_layout=product");
 }
 ?>
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -76,6 +83,7 @@ if(isset($_POST["sbm"])){
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-md-6">
+                        <?php if($error == 1) echo '<div class="alert alert-danger">Trạng thái và Hàng tồn không phù hợp !</div>';?>
                         <form role="form" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Tên sản phẩm</label>
@@ -85,6 +93,10 @@ if(isset($_POST["sbm"])){
                             <div class="form-group">
                                 <label>Giá sản phẩm</label>
                                 <input type="number" name="prd_price" required value="<?php echo $row["prd_price"]; ?>" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Tồn kho</label>
+                                <input type="number" name="prd_quantity" required value="<?php echo $row["prd_quantity"]; ?>" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Bảo hành</label>
