@@ -72,7 +72,7 @@
 			<li><a href="?page_layout=product"><svg class="glyph stroked bag">
 						<use xlink:href="#stroked-bag"></use>
 					</svg>Quản lý sản phẩm</a></li>
-			<li><a href="comment.html"><svg class="glyph stroked two messages">
+			<li><a href="?page_layout=comment"><svg class="glyph stroked two messages">
 						<use xlink:href="#stroked-two-messages" /></svg> Quản lý bình luận</a></li>
 			<li><a href="ads.html"><svg class="glyph stroked chain">
 						<use xlink:href="#stroked-chain" /></svg> Quản lý quảng cáo</a></li>
@@ -119,6 +119,12 @@
 				break;
 			case "add_category":
 				include_once("add_category.php");
+				break;
+			case "comment":
+				include_once("comment.php");
+				break;
+			case "delete_comment":
+				include_once("delete_comment.php");
 				break;
 		}
 	} else {
