@@ -46,10 +46,9 @@
 							$query = mysqli_query($conn, $sql);
 							while($row = mysqli_fetch_array($query)){
 								echo $row['user_full']; 
-							}
 							?>  <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><svg class="glyph stroked male-user">
+							<li><a href="index.php?page_layout=edit_user&user_id=<?php echo $row["user_id"]; }?>"><svg class="glyph stroked male-user">
 										<use xlink:href="#stroked-male-user"></use>
 									</svg> Hồ sơ</a></li>
 							<li><a href="logout.php"><svg class="glyph stroked cancel">
@@ -82,9 +81,9 @@
 					</svg>Quản lý sản phẩm</a></li>
 			<li><a href="?page_layout=comment"><svg class="glyph stroked two messages">
 						<use xlink:href="#stroked-two-messages" /></svg> Quản lý bình luận</a></li>
-			<li><a href="ads.html"><svg class="glyph stroked chain">
+			<li><a href="index.php"><svg class="glyph stroked chain">
 						<use xlink:href="#stroked-chain" /></svg> Quản lý quảng cáo</a></li>
-			<li><a href="setting.html"><svg class="glyph stroked gear">
+			<li><a href="index.php"><svg class="glyph stroked gear">
 						<use xlink:href="#stroked-gear" /></svg> Cấu hình</a></li>
 		</ul>
 
