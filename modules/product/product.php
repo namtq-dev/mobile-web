@@ -19,6 +19,7 @@ $row = mysqli_fetch_array($query)
                 <li><span>Đi kèm:</span> <?php echo $row["prd_accessories"]; ?></li>
                 <li><span>Tình trạng:</span> <?php echo $row["prd_new"]; ?></li>
                 <li><span>Khuyến Mại:</span> <?php echo $row["prd_promotion"]; ?></li>
+                <li><span>Tồn kho:</span> <?php echo $row["prd_quantity"]; ?></li>
                 <li id="price">Giá Bán (chưa bao gồm VAT)</li>
                 <li id="price-number"><?php echo formatPrice($row["prd_price"]); ?> VND</li>
                 <li id="status" <?php if ($row["prd_status"] == 0) { ?> class="text-danger" <?php } ?>><?php if ($row["prd_status"] == 1) {
@@ -27,7 +28,19 @@ $row = mysqli_fetch_array($query)
                                                                                                             echo "Hết hàng";
                                                                                                         } ?></li>
             </ul>
-            <div id="add-cart"><a href="modules/cart/cart_add.php?prd_id=<?php echo $row["prd_id"]; ?>">Mua ngay</a></div>
+            <div id="add-cart">
+                <?php
+                if( $row["prd_quantity"] > 0){
+                ?>
+                <a href="modules/cart/cart_add.php?prd_id=<?php echo $row["prd_id"]; ?>">Mua ngay</a>
+                <?php
+                } else {
+                ?>
+                <a href="index.php">Xem sản phẩm khác</a>
+                <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
     <div id="product-body" class="row">
