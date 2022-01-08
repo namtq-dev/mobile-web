@@ -5,5 +5,9 @@ $sql = "DELETE FROM category
         WHERE cat_id = $cat_id
 ";
 mysqli_query($conn, $sql);
+$sql = "DELETE FROM product
+        WHERE cat_id = $cat_id
+";
+mysqli_query($conn, $sql);
 header("location:index.php?page_layout=category");
 ?>

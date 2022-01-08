@@ -5,5 +5,9 @@ $sql = "DELETE FROM product
         WHERE prd_id = $prd_id
 ";
 mysqli_query($conn, $sql);
+$sql = "DELETE FROM comment
+        WHERE prd_id = $prd_id
+";
+mysqli_query($conn, $sql);
 header("location:index.php?page_layout=product");
 ?>
