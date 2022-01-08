@@ -53,7 +53,8 @@ use PHPMailer\PHPMailer\Exception;
             </div>
 
             <div class="cart-quantity col-lg-2 col-md-2 col-sm-12">
-                <input name="qtt[<?php echo $row["prd_id"]; ?>]" type="number" id="quantity" class="form-control form-blue quantity" value=<?php echo $_SESSION["cart"][$row["prd_id"]]; ?> min="1">
+                <input name="qtt[<?php echo $row["prd_id"]; ?>]" type="number" id="quantity" class="form-control form-blue quantity" 
+                value=<?php echo $_SESSION["cart"][$row["prd_id"]]; ?> min="1" max="<?php echo $row["prd_quantity"]; ?>">
             </div>
             <div class="cart-price col-lg-3 col-md-3 col-sm-12"><b><?php echo formatPrice($total_price); ?></b><a href="modules/cart/cart_del.php?prd_id=<?php echo $row["prd_id"]; ?>">Xóa</a></div>
         </div>
@@ -108,6 +109,11 @@ use PHPMailer\PHPMailer\Exception;
             <td width="10%">'.$_SESSION["cart"][$row["prd_id"]].'</td>
             <td width="20%">'.formatPrice($total_price).'VND</td>
         </tr>';
+        $prd_quantity = $row["prd_quantity"] - $_SESSION["cart"][$row["prd_id"]];
+        $sql = "UPDATE product
+                SET prd_quantity = $prd_quantity
+                WHERE prd_id = " . $row["prd_id"];
+        mysqli_query($conn, $sql);
         }
         $str_body .='
         <tr>

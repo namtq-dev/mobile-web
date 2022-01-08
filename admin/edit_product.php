@@ -33,7 +33,7 @@ if(isset($_POST["sbm"])){
     }
     $prd_details = $_POST["prd_details"];
 
-    echo $sql = "UPDATE product
+    $sql = "UPDATE product
     SET
         prd_name = '$prd_name',
         prd_price = $prd_price,
