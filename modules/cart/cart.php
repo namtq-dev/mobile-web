@@ -131,7 +131,7 @@ use PHPMailer\PHPMailer\Exception;
         }
         $str_body .='
         <tr>
-            <td colspan="2" width="70%"></td>
+            <td colspan="2" width="70%">Mã đơn hàng: '.$order_code.'</td>
             <td width="20%"><b><font color="#FF0000">'.formatPrice($total_price_all).'VND</font></b></td>
         </tr>
         </table>
