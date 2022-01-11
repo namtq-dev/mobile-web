@@ -79,7 +79,7 @@
 			<li><a href="?page_layout=product"><svg class="glyph stroked bag">
 						<use xlink:href="#stroked-bag"></use>
 					</svg>Quản lý sản phẩm</a></li>
-			<li><a href="index.php"><svg class="glyph stroked chain">
+			<li><a href="?page_layout=order"><svg class="glyph stroked chain">
 						<use xlink:href="#stroked-chain" /></svg> Quản lý đơn hàng</a></li>
 			<li><a href="?page_layout=comment"><svg class="glyph stroked two messages">
 						<use xlink:href="#stroked-two-messages" /></svg> Quản lý bình luận</a></li>

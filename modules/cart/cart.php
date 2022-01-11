@@ -42,7 +42,7 @@ use PHPMailer\PHPMailer\Exception;
     <form method="post">
         <?php
         $yCode = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J');
-        $order_code = $yCode[intval(date('Y')) - 2011] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%02d', rand(0, 99));
+        $order_code = $yCode[intval(date('Y')) - 2022] . strtoupper(dechex(date('m'))) . date('d') . substr(time(), -5) . substr(microtime(), 2, 5) . sprintf('%02d', rand(0, 99));
         $total_price_all = 0;
         while($row = mysqli_fetch_array($query)){
             $total_price = $_SESSION["cart"][$row["prd_id"]]*$row["prd_price"];
