@@ -239,7 +239,10 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
---Table order
+--
+-- Table structure for table `orders`
+--
+
 CREATE TABLE `orders`(
   `order_code` varchar(255) NOT NULL,
   `order_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -249,4 +252,4 @@ CREATE TABLE `orders`(
   `order_status` int(5) NOT NULL,
   `order_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (`prd_id`) REFERENCES `product`(`prd_id`)
-)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
