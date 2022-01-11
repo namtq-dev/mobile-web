@@ -238,3 +238,15 @@ ALTER TABLE `user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--Table order
+CREATE TABLE `orders`(
+  `order_code` varchar(255) NOT NULL,
+  `order_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `prd_id` int(11) NOT NULL,
+  `user_mail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `order_quantity` int(11) NOT NULL,
+  `order_status` int(5) NOT NULL,
+  `order_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`prd_id`) REFERENCES `product`(`prd_id`)
+)
