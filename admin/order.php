@@ -15,17 +15,17 @@
         </div>
     </div>
     <!--/.row-->
+
     <div id="toolbar" class="btn-group">
-        <a href="index.php?page_layout=order&order_status=0" class="btn">
+        <a href="index.php?page_layout=order&order_status=0" class="btn btn-success">
             Đang giao
         </a>
-        <a href="index.php?page_layout=order&order_status=1" class="btn">
-            Thành công
+        <a href="index.php?page_layout=order&order_status=0" class="btn btn-success">
+            Đang giao
         </a>
-        <a href="index.php?page_layout=order&order_status=2" class="btn">
+        <a href="index.php?page_layout=order&order_status=2" class="btn btn-success">
             Bị hủy
         </a>
-
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -58,7 +58,7 @@
                             if (isset($_GET['order_status'])) {
                                 $order_status = $_GET['order_status'];
                             }
-                            
+
                             $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM orders WHERE order_status=$order_status"));
                             $total_pages = ceil($total_rows / $rows_per_page);  //hàm làm tròn lên
 
