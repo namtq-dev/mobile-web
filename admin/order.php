@@ -16,11 +16,11 @@
     </div>
     <!--/.row-->
     <div id="toolbar" class="btn-group">
-    <a href="index.php?page_layout=order&order_status=0" class="btn">
-        Đang giao
-    </a>
+        <a href="index.php?page_layout=order&order_status=0" class="btn">
+            Đang giao
+        </a>
         <a href="index.php?page_layout=order&order_status=1" class="btn">
-            Thành công 
+            Thành công
         </a>
         <a href="index.php?page_layout=order&order_status=2" class="btn">
             Bị hủy
@@ -34,7 +34,7 @@
                     <table data-toolbar="#toolbar" data-toggle="table">
                         <thead>
                             <tr>
-                                
+
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th>Mã đơn hàng</th>
                                 <th data-field="email" data-sortable="true">Email</th>
@@ -47,39 +47,66 @@
                         <tbody>
                             <?php
                             $order_status = 0;
-                            if(isset($_GET["page"])){
+                            if (isset($_GET["page"])) {
                                 $page = $_GET["page"];
-                            } else{
+                            } else {
                                 $page = 1;
                             }
                             $rows_per_page = 5;
                             $per_row = $page * $rows_per_page - $rows_per_page;
-                            $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM orders"));
-                            $total_pages = ceil($total_rows/$rows_per_page);  //hàm làm tròn lên
+
+                            if (isset($_GET['order_status'])) {
+                                $order_status = $_GET['order_status'];
+                            }
+                            
+                            $total_rows = mysqli_num_rows(mysqli_query($conn, "SELECT * FROM orders WHERE order_status=$order_status"));
+                            $total_pages = ceil($total_rows / $rows_per_page);  //hàm làm tròn lên
 
                             $list_pages = '<ul class="pagination">';
                             //Page Previous
                             $page_prev = $page - 1;
-                            if($page_prev == 0){
+                            if ($page_prev == 0) {
                                 $page_prev = 1;
-                            }
-                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='.$page_prev.'">&laquo;</a></li>';
-                            //End Page Previous
-                            for($i = 1; $i <= $total_pages; $i++){
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='.$i.'">'.$i.'</a></li>';
                             }
                             //Page Next
                             $page_next = $page + 1;
-                            if($page_next > $total_pages){
+                            if ($page_next > $total_pages) {
                                 $page_next = $total_pages;
                             }
-                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='.$page_next.'">&raquo;</a></li>';
-                            //End Page Next
-                            $list_pages .= '</ul>';
-                            echo $list_pages;
-                            if(isset($_GET['order_status'])){
-                                $order_status = $_GET['order_status'];
+
+                            if ($order_status == 0) {
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $page_prev . '">&laquo;</a></li>';
+                                //End Page Previous
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $i . '">' . $i . '</a></li>';
+                                }
+
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $page_next . '">&raquo;</a></li>';
+                                //End Page Next
+                                $list_pages .= '</ul>';
+                            } else if ($order_status == 1) {
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $page_prev . '">&laquo;</a></li>';
+                                //End Page Previous
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $i . '">' . $i . '</a></li>';
+                                }
+
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $page_next . '">&raquo;</a></li>';
+                                //End Page Next
+                                $list_pages .= '</ul>';
+                            } else if ($order_status == 2) {
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $page_prev . '">&laquo;</a></li>';
+                                //End Page Previous
+                                for ($i = 1; $i <= $total_pages; $i++) {
+                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $i . '">' . $i . '</a></li>';
+                                }
+
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $page_next . '">&raquo;</a></li>';
+                                //End Page Next
+                                $list_pages .= '</ul>';
                             }
+                            echo $list_pages;
+
                             $sql = "SELECT o.order_id, o.order_code, o.user_mail, p.prd_name, o.order_quantity, o.order_status, o.order_time 
                             FROM orders AS o INNER JOIN product AS p 
                             ON o.prd_id = p.prd_id 
@@ -91,22 +118,22 @@
                             while ($row = mysqli_fetch_array($query)) {
                             ?>
                                 <tr>
-                                    <td style><?php echo $row["order_id"];?></td>
-                                    <td style><?php echo $row["order_code"];?></td>
-                                    <td style><?php echo $row["user_mail"];?></td>
-                                    <td style><?php echo $row["prd_name"];?></td>
-                                    <td style><?php echo $row["order_quantity"];?></td>
-                                    <td style><?php echo $row["order_time"];?></td>
-                                    <?php if($order_status == 0) {?>
-                                    <td class="form-group">
-                                        <a href="update_order.php?order_id=<?php echo $row["order_id"]?>" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i></a>
-                                        <a href="cancel_order.php?order_id=<?php echo $row["order_id"]?>" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></a>
-                                    </td>
+                                    <td style><?php echo $row["order_id"]; ?></td>
+                                    <td style><?php echo $row["order_code"]; ?></td>
+                                    <td style><?php echo $row["user_mail"]; ?></td>
+                                    <td style><?php echo $row["prd_name"]; ?></td>
+                                    <td style><?php echo $row["order_quantity"]; ?></td>
+                                    <td style><?php echo $row["order_time"]; ?></td>
+                                    <?php if ($order_status == 0) { ?>
+                                        <td class="form-group">
+                                            <a href="update_order.php?order_id=<?php echo $row["order_id"] ?>" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i></a>
+                                            <a href="cancel_order.php?order_id=<?php echo $row["order_id"] ?>" class="btn btn-warning"><i class="glyphicon glyphicon-remove"></i></a>
+                                        </td>
                                     <?php } else { ?>
                                         <td class="form-group">
-                                            <a href="delete_order.php?order_id=<?php echo $row["order_id"]?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a href="delete_order.php?order_id=<?php echo $row["order_id"] ?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
                                         </td>
-                                    <?php } ?>  
+                                    <?php } ?>
                                 </tr>
                             <?php
                             }
@@ -114,10 +141,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="panel-footer"> 
+                <div class="panel-footer">
                     <nav aria-label="Page navigation example">
                         <?php
-                            echo $list_pages;
+                        echo $list_pages;
                         ?>
                     </nav>
                 </div>
