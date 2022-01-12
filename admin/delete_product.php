@@ -1,11 +1,15 @@
 <?php
 include_once("connect.php");
 $prd_id = $_GET["prd_id"];
-$sql = "DELETE FROM product
+$sql = "DELETE FROM comment
         WHERE prd_id = $prd_id
 ";
 mysqli_query($conn, $sql);
-$sql = "DELETE FROM comment
+$sql = "DELETE FROM orders
+        WHERE prd_id = $prd_id
+";
+mysqli_query($conn, $sql);
+$sql = "DELETE FROM product
         WHERE prd_id = $prd_id
 ";
 mysqli_query($conn, $sql);
