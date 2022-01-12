@@ -74,37 +74,15 @@
                                 $page_next = $total_pages;
                             }
 
-                            if ($order_status == 0) {
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $page_prev . '">&laquo;</a></li>';
+                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status='.$order_status.'&page=' . $page_prev . '">&laquo;</a></li>';
                                 //End Page Previous
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $i . '">' . $i . '</a></li>';
-                                }
-
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&page=' . $page_next . '">&raquo;</a></li>';
-                                //End Page Next
-                                $list_pages .= '</ul>';
-                            } else if ($order_status == 1) {
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $page_prev . '">&laquo;</a></li>';
-                                //End Page Previous
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $i . '">' . $i . '</a></li>';
-                                }
-
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=1&page=' . $page_next . '">&raquo;</a></li>';
-                                //End Page Next
-                                $list_pages .= '</ul>';
-                            } else if ($order_status == 2) {
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $page_prev . '">&laquo;</a></li>';
-                                //End Page Previous
-                                for ($i = 1; $i <= $total_pages; $i++) {
-                                    $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $i . '">' . $i . '</a></li>';
-                                }
-
-                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status=2&page=' . $page_next . '">&raquo;</a></li>';
-                                //End Page Next
-                                $list_pages .= '</ul>';
+                            for ($i = 1; $i <= $total_pages; $i++) {
+                                $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status='.$order_status.'&page=' . $i . '">' . $i . '</a></li>';
                             }
+
+                            $list_pages .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=order&order_status='.$order_status.'&page=' . $page_next . '">&raquo;</a></li>';
+                            //End Page Next
+                            $list_pages .= '</ul>';
                             echo $list_pages;
 
                             $sql = "SELECT o.order_id, o.order_code, o.user_mail, p.prd_name, o.order_quantity, o.order_status, o.order_time 
