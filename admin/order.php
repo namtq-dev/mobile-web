@@ -15,7 +15,6 @@
         </div>
     </div>
     <!--/.row-->
-
     <div id="toolbar" class="btn-group">
         <a href="index.php?page_layout=order&order_status=0" class="btn btn-success">
             Đang giao
